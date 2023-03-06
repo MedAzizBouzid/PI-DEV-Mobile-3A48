@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import utils.Statics;
 import java.util.List;
+import static jdk.nashorn.internal.runtime.Debug.id;
 import static utils.Statics.BAASE_URL;
 /**
  *
@@ -170,5 +171,20 @@ public class serviceProduit {
          });
          NetworkManager.getInstance().addToQueueAndWait(req);
          return resultOK;
+     }
+     public boolean modifierProduit(Produit produit){
+         String url = Statics.BAASE_URL+"editJson/"+produit.getId()+"?nom="+produit.getNom()+"&image="+produit.getImage()+"&prix="+produit.getPrix()+"&stock="+produit.getStock();
+         req.setUrl(url);
+         req.addResponseListener(new ActionListener<NetworkEvent>(){
+             @Override
+             public void actionPerformed(NetworkEvent evt){
+                resultOK=req.getResponseCode()==200;
+                 req.removeResponseCodeListener(this);
+                
+             }
+         });
+         NetworkManager.getInstance().addToQueueAndWait(req);
+         return resultOK;
+         
      }
 }

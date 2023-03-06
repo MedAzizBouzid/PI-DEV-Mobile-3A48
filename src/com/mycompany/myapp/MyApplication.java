@@ -48,6 +48,7 @@ public class MyApplication {
     }
     
     public void start() {
+        
        new HomeForm().show();
     }
 

@@ -14,6 +14,7 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.util.Resources;
 import entities.Produit;
 import java.io.IOException;
 import java.net.URI;
@@ -44,7 +45,7 @@ public class AddProduitForm extends Form{
     }
     
     
-    public AddProduitForm(Form previous) {
+    public AddProduitForm(Form previous,Resources res) {
         setTitle("add a new Produit");
         setLayout(BoxLayout.y());
         TextField tfName = new TextField(""," name");
@@ -67,7 +68,12 @@ public class AddProduitForm extends Form{
                      try{
                             Produit p = new Produit(Integer.parseInt(tfstock.getText()),Integer.parseInt(tfprix.getText()),tfimage.getText(),tfName.getText());
                             if(new serviceProduit().addProduit(p))
-                                Dialog.show("Success", "connection accepted", new Command("OK"));
+                            {
+                                new ListProduitForm(previous,res).show();
+                
+                            }
+                             
+                            
                             else
                                 Dialog.show("ERROR", "Server error", new Command("OK"));
                         }   catch(NumberFormatException e){
