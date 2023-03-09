@@ -11,8 +11,18 @@ package entities;
  */
 public class Produit {
     private int id,stock;
+String nomCat;
+
     private float prix;
     String image,nom;
+    public String getNomCat() {
+        return nomCat;
+    }
+
+    public void setNomCat(String nomCat) {
+        this.nomCat = nomCat;
+    }
+  
 
     public int getStock() {
         return stock;
@@ -41,19 +51,21 @@ public class Produit {
     public Produit() {
     }
 
-    public Produit(int stock, float prix, String image, String nom) {
+    public Produit(int stock, float prix, String image, String nom,String nomCat) {
         this.stock = stock;
         this.prix = prix;
         this.image = image;
         this.nom = nom;
+        this.nomCat=nomCat;
     }
 
-    public Produit(int id, int stock, float prix, String image, String nom) {
+    public Produit(int id, int stock, float prix, String image, String nom,String nomCat) {
         this.id = id;
         this.stock = stock;
         this.prix = prix;
         this.image = image;
         this.nom = nom;
+        this.nomCat=nomCat;
     }
 
     public String getImage() {

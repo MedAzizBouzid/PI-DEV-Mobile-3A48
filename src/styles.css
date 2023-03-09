@@ -1,0 +1,82 @@
+/* Style pour le conteneur des produits */
+.container {
+background-color: #FFFFFF;
+    box-shadow: 0px 2px 6px #BBBBBB;
+}
+
+/* Style pour le nom du produit */
+.product-name {
+    font-size: large;
+    font-weight: bold;
+    color: #333333;
+}
+
+/* Style pour l'image du produit */
+.product-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+/* Style pour le prix du produit */
+.product-price {
+    font-size: medium;
+    font-weight: bold;
+    color: #F7AD02;
+}
+
+/* Style pour le stock du produit */
+.product-stock {
+    font-size: medium;
+    font-weight: bold;
+    color: #333333;
+}
+
+/* Style pour la catégorie du produit */
+.product-category {
+    font-size: small;
+    color: #888888;
+}
+
+/* Style pour le bouton de suppression du produit */
+.product-delete-button {
+    font-size: small;
+    font-weight: bold;
+    color: #F21F1F;
+}
+
+/* Style pour le bouton de modification du produit */
+.product-edit-button {
+    font-size: small;
+    font-weight: bold;
+    color: #F7AD02;
+}
+
+/* Ajout des styles aux éléments de chaque produit */
+.lbNom {
+    cn1-ui-label: product-name;
+}
+
+.lbImage {
+    cn1-ui-label: product-image;
+}
+
+.lbPrix {
+    cn1-ui-label: product-price;
+}
+
+.lbStock {
+    cn1-ui-label: product-stock;
+}
+
+.lbCat {
+    cn1-ui-label: product-category;
+}
+
+.lSupprimer {
+    cn1-ui-label: product-delete-button;
+}
+
+.lModifier {
+    cn1-ui-label: product-edit-button;
+}

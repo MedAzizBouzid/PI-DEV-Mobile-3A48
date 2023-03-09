@@ -6,6 +6,7 @@
 package gui;
 
 import com.codename1.components.FloatingHint;
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
@@ -60,6 +61,11 @@ public class UpdateProduit extends BaseForm {
                           
                           if(serviceProduit.getInstance().modifierProduit(p)){
                             Form previous = null;
+                            ToastBar.Status status = ToastBar.getInstance().createStatus();
+                      status.setMessage("Modification en cours...");
+                      status.setShowProgressIndicator(true);
+                      status.show();
+                         status.clear();
                               new ListProduitForm(previous,res).show();
                           }
                             });

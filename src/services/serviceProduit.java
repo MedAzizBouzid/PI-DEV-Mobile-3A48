@@ -45,7 +45,7 @@ public class serviceProduit {
       }
     public boolean addProduit(Produit p){
         String nom = p.getNom();
-        String url = Statics.BAASE_URL+"ajoutMobile?nom="+nom+"&image="+p.getImage()+"&prix="+p.getPrix()+"&stock="+p.getStock();
+        String url = Statics.BAASE_URL+"ajoutMobile?nom="+nom+"&image="+p.getImage()+"&prix="+p.getPrix()+"&stock="+p.getStock()+"&categorie="+p.getNomCat();
          req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -69,9 +69,11 @@ public class serviceProduit {
                 Produit p=new Produit();
                 float id = Float.parseFloat(obj.get("id").toString());
                 p.setId((int)id);
+                System.out.println(obj);
                 if (obj.get("nom") == null) {
                     p.setNom("null");
-                } else {
+                }
+                else {
                     p.setNom(obj.get("nom").toString());
                 }
                  if (obj.get("image") == null) {
@@ -89,6 +91,12 @@ public class serviceProduit {
                     p.setNom("null");
                 } else {
                     p.setPrix(Float.parseFloat(obj.get("prix").toString()));
+                }
+                    if (obj.get("categorie_id") == null) {
+                    p.setNomCat("null");
+                }
+                else {
+                    p.setNomCat(obj.get("categorie_id").toString());
                 }
                  
                 
@@ -187,4 +195,23 @@ public class serviceProduit {
          return resultOK;
          
      }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+
+     
 }

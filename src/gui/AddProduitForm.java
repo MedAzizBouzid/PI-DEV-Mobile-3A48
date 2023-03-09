@@ -5,6 +5,7 @@
  */
 package gui;
 
+import com.codename1.components.ToastBar;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
@@ -49,10 +50,11 @@ public class AddProduitForm extends Form{
         setTitle("add a new Produit");
         setLayout(BoxLayout.y());
         TextField tfName = new TextField(""," name");
-         TextField tfstock = new TextField("","Stock");
-                  TextField tfimage = new TextField("","image");
-
+        TextField tfstock = new TextField("","Stock");
+        TextField tfimage = new TextField("","image");
          TextField tfprix = new TextField("","Prix");
+         TextField tfCat = new TextField("","Id categorie");
+
       
 
 
@@ -66,9 +68,13 @@ public class AddProduitForm extends Form{
                 else
                 {
                      try{
-                            Produit p = new Produit(Integer.parseInt(tfstock.getText()),Integer.parseInt(tfprix.getText()),tfimage.getText(),tfName.getText());
+                            Produit p = new Produit(Integer.parseInt(tfstock.getText()),Float.parseFloat(tfprix.getText()),tfimage.getText(),tfName.getText(),tfCat.getText());
                             if(new serviceProduit().addProduit(p))
-                            {
+                            {   ToastBar.Status status = ToastBar.getInstance().createStatus();
+                      status.setMessage("Ajout en cours...");
+                      status.setShowProgressIndicator(true);
+                      status.show();
+                         status.clear();
                                 new ListProduitForm(previous,res).show();
                 
                             }
@@ -77,14 +83,14 @@ public class AddProduitForm extends Form{
                             else
                                 Dialog.show("ERROR", "Server error", new Command("OK"));
                         }   catch(NumberFormatException e){
-                            Dialog.show("ERROR","stock or prix must be a number", new Command("OK"));
+                            Dialog.show("ERROR","stock or prix or  must be a number", new Command("OK"));
                         }
                             
                         }
             }
         });
-        addAll(tfName,tfimage,tfstock,tfprix,btnValider);
-        getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+        addAll(tfName,tfimage,tfstock,tfprix,tfCat,btnValider);
+        getToolbar().addMaterialCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK,e->new HomeForm().show());
     }
     
 }

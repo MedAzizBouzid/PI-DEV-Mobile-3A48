@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="background" cloudDestinationProperty="background" scrollableX="false" >
+  <component type="ImageViewer" name="background" cloudDestinationProperty="ImageViewer" nextFocusDown="background" uiid="ImageViewer" focusable="true" >
+    <custom name="image" type="com.codename1.ui.Image" value="signin-background.jpg" />
+  </component>
+</component>

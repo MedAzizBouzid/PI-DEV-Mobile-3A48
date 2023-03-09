@@ -4,6 +4,8 @@
     <image name="activation-background.jpg"  />
     <image name="back-logo.jpeg"  />
     <image name="back.png"  />
+    <ui name="background" />
+    <image name="bckg.jpg"  />
     <image name="confirmation-background.jpg"  />
     <image name="dog.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
@@ -21,6 +23,7 @@
     <image name="oublier.png"  />
     <image name="profile-background.jpg"  />
     <image name="profile-pic.jpg" type="multi"  />
+    <image name="shop2.jpg"  />
     <image name="signin-background.jpg"  />
     <image name="signup-background.jpg"  />
     <image name="smily.png" type="multi"  />
