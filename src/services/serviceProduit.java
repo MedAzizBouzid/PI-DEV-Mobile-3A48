@@ -14,6 +14,7 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
 import com.codename1.util.Callback;
+import entities.Categorie;
 import entities.Produit;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +33,8 @@ public class serviceProduit {
     public static serviceProduit instance;
     public boolean resultOK=true;
     private ArrayList<Produit> Produits;
+    private ArrayList<Categorie> Categories;
+
     private Produit produit;
     Resources res;
     ConnectionRequest req;
@@ -64,12 +67,14 @@ public class serviceProduit {
             JSONParser j = new JSONParser();
             Map<String, Object> tasksListJson
                     = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+
            List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
             for(Map<String,Object> obj : list){
+               Map<String, String> cat=(Map<String, String>) obj.get("categorie");
+
                 Produit p=new Produit();
                 float id = Float.parseFloat(obj.get("id").toString());
                 p.setId((int)id);
-                System.out.println(obj);
                 if (obj.get("nom") == null) {
                     p.setNom("null");
                 }
@@ -92,11 +97,11 @@ public class serviceProduit {
                 } else {
                     p.setPrix(Float.parseFloat(obj.get("prix").toString()));
                 }
-                    if (obj.get("categorie_id") == null) {
+                    if (cat.get("type") == null) {
                     p.setNomCat("null");
                 }
                 else {
-                    p.setNomCat(obj.get("categorie_id").toString());
+                    p.setNomCat(cat.get("type").toString());
                 }
                  
                 
@@ -107,7 +112,38 @@ public class serviceProduit {
         }
       return Produits;
     }
-    
+      public ArrayList<Categorie> parseCategories(String jsonText){
+        try {
+            Categories =new ArrayList<>();
+            JSONParser j = new JSONParser();
+            Map<String, Object> tasksListJson
+                    = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+            System.out.println(tasksListJson) ;
+
+           List<Map<String, Object>> list = (List<Map<String, Object>>) tasksListJson.get("root");
+            for(Map<String,Object> obj : list){
+           
+
+                Categorie c=new Categorie();
+                float id = Float.parseFloat(obj.get("id").toString());
+                c.setId((int)id);
+                System.out.println(obj);
+                if (obj.get("Type") == null) {
+                    c.setType("null");
+                }
+                else {
+                    c.setType(obj.get("Type").toString());
+                }
+               
+                 
+                
+               Categories.add(c);
+            }
+        } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+        }
+      return Categories;
+    }
     public ArrayList<Produit> getAllProduits(){
         String url =Statics.BAASE_URL+"showMobile";
         req.setUrl(url);
@@ -122,9 +158,23 @@ public class serviceProduit {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return Produits;
         
-    }
+    }  
+      public ArrayList<Categorie> getAllCategories(){
+        String url =Statics.BAASE_URL+"categorieMobile";
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                Categories = parseCategories(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return Categories;
+        
+    }  
     
-   
      public Produit getProduitById(int id, String jsonText) {
     
          try {

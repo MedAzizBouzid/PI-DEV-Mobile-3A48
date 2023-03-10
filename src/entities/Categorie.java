@@ -11,6 +11,15 @@ package entities;
  */
 public class Categorie {
    private  String Type;
+   private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Categorie() {
     }
@@ -23,6 +32,11 @@ public class Categorie {
         return Type;
     }
 
+    public void setType(int id,String Type) {
+        this.Type = Type;
+        this .id=id;
+    }
+    
     public void setType(String Type) {
         this.Type = Type;
     }

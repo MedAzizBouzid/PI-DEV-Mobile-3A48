@@ -14,6 +14,7 @@ import com.codename1.ui.CheckBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -32,22 +33,14 @@ import services.serviceProduit;
  * @author USER
  */
 public class ListProduitForm extends Form{
-
+Image img = null;
     public ListProduitForm(Form previous,Resources res) {
           setTitle("list des produits");
                   setLayout(BoxLayout.y());
 
                   int screenWidth = Display.getInstance().getDisplayWidth();
          ArrayList<Produit> Produits = serviceProduit.getInstance().getAllProduits();
-        try{
-         Image im = Image.createImage("/shop2.jpg");
-         Image resizedImage = im.scaled(screenWidth, -1);
-                               ImageViewer iv = new ImageViewer(resizedImage);
-                               add(iv);
-         }
-         catch(IOException e){
-             
-         }
+      
          for (Produit t : Produits) {
             addElement(t,previous,res);
         }
@@ -61,19 +54,34 @@ public class ListProduitForm extends Form{
  
    
     public void addElement(Produit task,Form previous,Resources res) {
-         
-Label lbPrix = new Label("Prix : " + task.getPrix());
-lbPrix.setUIID("product-price");
+         Label lbPrix0 = new Label("Prix : ");
+Label lbPrix = new Label(" " + task.getPrix());
+lbPrix0.setUIID("product-price");
 
   
 Label lbStock0 = new Label("Stock : ");
 lbStock0.setUIID("product-stock");
 Label lbStock = new Label(""+ task.getStock());
 
-Label lbNom = new Label("Nom du produit: "+ task.getNom());
-lbNom.setUIID("product-name");
-Label lbImage = new Label("Image: "+task.getImage());
-Label lbCategorie = new Label("Categorie: "+task.getNomCat());
+Label lbNom0 = new Label("Nom du produit: ");
+
+Label lbNom = new Label(""+ task.getNom());
+lbNom0.setUIID("product-name");
+        System.out.println(task.getImage());
+     
+try {
+    img = Image.createImage("file://C:/Users/Admin/AppData/Local/Temp/"+task.getImage());
+   
+    System.out.println(img);
+} catch (IOException ex) {
+    ex.printStackTrace();
+}
+EncodedImage encImg = EncodedImage.createFromImage(img, false);
+Label lbImage = new Label("Image: ");
+lbImage.setIcon(encImg);
+Label lbCategorie0 = new Label("Categorie : ");
+lbCategorie0.setUIID("product-stock");
+Label lbCategorie = new Label(""+task.getNomCat());
 
 
             
@@ -130,20 +138,23 @@ lSupprimer.addPointerPressedListener (l->{
 Label bergila = new Label("-----------------------------------------------------");   
 
  Container container = BoxLayout.encloseY(
-        lbNom, 
         lbImage,
+         lbNom0,
+         lbNom, 
+       lbPrix0,
         lbPrix, 
         lbStock0,
         lbStock, 
+        lbCategorie0,
         lbCategorie,
      
       
         BoxLayout.encloseX(lModifier, lSupprimer),  bergila
     );
-
+ container.setUIID("container");
      // add container to the form
     add(container);
- container.setUIID("container");
+
            
 
      

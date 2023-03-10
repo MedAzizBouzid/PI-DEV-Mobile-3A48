@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <theme name="aa">
+        <val key="@includeNativeBool" value="true" />
+    </theme>
     <image name="activation-background.jpg"  />
     <image name="back-logo.jpeg"  />
     <image name="back.png"  />
-    <ui name="background" />
     <image name="bckg.jpg"  />
     <image name="confirmation-background.jpg"  />
     <image name="dog.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
+    <image name="Image 1"  />
     <image name="Logo.png" type="multi"  />
     <image name="map-pin.jpg"  />
     <image name="news-item-1.jpg"  />
@@ -45,29 +48,29 @@
         <val key="BottomPad.padding" value="0,0,0,0" />
         <val key="BottomPad.transparency" value="0" />
         <val key="Button.align" value="4" />
-        <border key="Button.border" type="round" roundBorderColor="16723285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
-        <val key="Button.fgColor" value="ffffff" />
+        <border key="Button.border" type="round" roundBorderColor="16777011" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
+        <val key="Button.fgColor" value="0" />
         <font key="Button.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="Button.marUnit" value="2,2,2,2" />
-        <val key="Button.margin" value="3,3,2,2" />
+        <val key="Button.margin" value="3.0,3.0,29.0,29.0" />
         <val key="Button.padUnit" value="2,2,2,2" />
-        <val key="Button.padding" value="2,2,2,2" />
+        <val key="Button.padding" value="2.0,2.0,0.0,2.0" />
         <val key="Button.press#align" value="4" />
-        <border key="Button.press#border" type="round" roundBorderColor="12982329" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
+        <border key="Button.press#border" type="round" roundBorderColor="16776960" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="Button.press#fgColor" value="ffffff" />
         <font key="Button.press#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="Button.press#marUnit" value="2,2,2,2" />
-        <val key="Button.press#margin" value="3,3,2,2" />
+        <val key="Button.press#margin" value="3.0,3.0,2.0,2.0" />
         <val key="Button.press#padUnit" value="2,2,2,2" />
-        <val key="Button.press#padding" value="2,2,2,2" />
+        <val key="Button.press#padding" value="2.0,2.0,2.0,2.0" />
         <val key="Button.sel#align" value="4" />
-        <border key="Button.sel#border" type="round" roundBorderColor="16723285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
+        <border key="Button.sel#border" type="round" roundBorderColor="16776960" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="Button.sel#fgColor" value="ffffff" />
         <font key="Button.sel#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="Button.sel#marUnit" value="2,2,2,2" />
-        <val key="Button.sel#margin" value="3,3,2,2" />
+        <val key="Button.sel#margin" value="3.0,3.0,2.0,2.0" />
         <val key="Button.sel#padUnit" value="2,2,2,2" />
-        <val key="Button.sel#padding" value="2,2,2,2" />
+        <val key="Button.sel#padding" value="2.0,2.0,2.0,2.0" />
         <val key="CenterLabel.align" value="4" />
         <val key="CenterLabel.derive" value="Label" />
         <val key="CenterLink.align" value="4" />
@@ -131,10 +134,13 @@
         <val key="LogoLabel.padUnit" value="2,0,2,0" />
         <val key="LogoLabel.padding" value="3,3,0,0" />
         <val key="LogoLabel.transparency" value="0" />
+        <val key="MenuButton.bgImage" value="shop2.jpg" />
+        <val key="MenuButton.bgType" value="3" />
+        <border key="MenuButton.border" type="image" i1="activation-background.jpg" i2="activation-background.jpg" i3="activation-background.jpg" i4="activation-background.jpg" i5="activation-background.jpg" i6="activation-background.jpg" i7="activation-background.jpg" i8="activation-background.jpg" />
         <val key="MenuButton.fgColor" value="ffffff" />
         <font key="MenuButton.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
         <val key="MenuButton.padUnit" value="2,2,2,2" />
-        <val key="MenuButton.padding" value="2,2,2,2" />
+        <val key="MenuButton.padding" value="2.0,2.0,2.0,2.0" />
         <val key="MenuButton.press#fgColor" value="ffffff" />
         <font key="MenuButton.press#font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
         <val key="MenuButton.press#padUnit" value="2,2,2,2" />
