@@ -20,6 +20,7 @@ import com.mycompany.gui.AjoutReclamationForm;
 import com.mycompany.gui.ProfileForm;
 import com.mycompany.gui.SessionManager;
 import java.util.Map;
+
 /**
  *
  * @author dhiaz
@@ -30,6 +31,8 @@ public class ServiceUser {
     public static ServiceUser instance = null;
 
     public static boolean resultOk = true;
+    public static String codee = "";
+
     String json;
 
     //initilisation connection request 
@@ -148,8 +151,8 @@ public class ServiceUser {
         String userName = t.getUserName();
         int numTel = t.getNumTel();
 
-        String url = Statics.BASE_URL + "/editUserMobile?email=" + email + "&password=" + password + "&nom=" + nom + "&prenom=" + prenom
-                + "&username=" + userName + "&numTel=" + numTel + "&id=" + SessionManager.getId();
+            String url = Statics.BASE_URL + "/editUserMobile?email=" + email + "&password=" + password + "&nom=" + nom + "&prenom=" + prenom
+                    + "&username=" + userName + "&numTel=" + numTel + "&id=" + SessionManager.getId();
 
         req.setUrl(url);
         req.setPost(false);
@@ -160,34 +163,83 @@ public class ServiceUser {
                 resultOk = req.getResponseCode() == 200; //Code HTTP 200 OK
                 req.removeResponseListener(this);
 
-                    SessionManager.setPassowrd(t.getPassword());
-                    SessionManager.setName(t.getNom());
-                    SessionManager.setLastname(t.getPrenom());
-                    SessionManager.setNumtel(t.getNumTel());
+                SessionManager.setPassowrd(t.getPassword());
+                SessionManager.setName(t.getNom());
+                SessionManager.setLastname(t.getPrenom());
+                SessionManager.setNumtel(t.getNumTel());
 
-                    SessionManager.setUserName(t.getUserName());
-                    SessionManager.setEmail(t.getEmail());
+                SessionManager.setUserName(t.getUserName());
+                SessionManager.setEmail(t.getEmail());
 //                
 //                //photo 
 //                
-                    if (t.getImage() != null) {
-                        SessionManager.setImage(t.getImage());
-                    }
+                if (t.getImage() != null) {
+                    SessionManager.setImage(t.getImage());
+                }
 
-                
-                
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOk;
     }
 
-    /************************************************/
-     public boolean deleteAccount(int id) {
-
-        
+    /**
+     * *********************************************
+     */
+    public boolean deleteAccount(int id) {
 
         String url = Statics.BASE_URL + "/deleteAccount?id=" + id;
+
+        req.setUrl(url);
+        req.setPost(false);
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOk = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOk;
+    }
+
+    public String sendCode(TextField email, Resources rs) {
+
+        String url = Statics.BASE_URL + "/forgetpwdMobile?email=" + email.getText().toString();
+        req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
+        req.setUrl(url);
+
+        req.addResponseListener((e) -> {
+
+            JSONParser j = new JSONParser();
+
+            String json = new String(req.getResponseData()) + "";
+
+            try {
+
+                if (json.equals("fail")) {
+                    Dialog.show("Send failed", "User dose not exist", "OK", null);
+                } else {
+                    System.out.println("data ==" + json);
+//                Map<String, Object> forgetPwd = j.parseJSON(new CharArrayReader(json.toCharArray()));
+//                
+                    System.out.println(json.subSequence(17, 23));
+                    codee = (String) json.subSequence(17, 23);
+                    SessionManager.setEmail(email.getText());
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return codee;
+    }
+    
+    public boolean changePwd(TextField code,TextField password){
+         String url = Statics.BASE_URL + "/changepwd?code=" + code.getText().toString()+"&email="+SessionManager.getEmail()+"&newPwd="+password.getText().toString();
 
         req.setUrl(url);
         req.setPost(false);

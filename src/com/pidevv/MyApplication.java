@@ -13,6 +13,7 @@ import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
 import com.mycompany.gui.AjoutReclamationForm;
+import com.mycompany.gui.ChangePwd;
 import com.mycompany.gui.MapForm;
 import com.mycompany.gui.ProfileForm;
 import com.mycompany.gui.SessionManager;
@@ -61,6 +62,8 @@ public class MyApplication {
         if (SessionManager.getUserName() == null) {
 
             new SignInForm(theme).show();
+//            new ChangePwd(theme).show();
+
         }else{
             new ProfileForm(theme).show();
         }
