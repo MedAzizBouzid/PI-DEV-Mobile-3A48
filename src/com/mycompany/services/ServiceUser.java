@@ -20,7 +20,6 @@ import com.mycompany.gui.AjoutReclamationForm;
 import com.mycompany.gui.ProfileForm;
 import com.mycompany.gui.SessionManager;
 import java.util.Map;
-
 /**
  *
  * @author dhiaz

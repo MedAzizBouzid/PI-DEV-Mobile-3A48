@@ -37,6 +37,8 @@ import com.mycompany.services.ServiceUser;
 import com.mycompany.services.ServiceUtilisateur;
 import java.util.Vector;
 
+
+
 /**
  * Signup UI
  *
@@ -63,8 +65,7 @@ public class SignUpForm extends BaseForm {
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
         TextField numtel = new TextField("", "numtel", 20, TextField.ANY);
 
-        //Role 
-        //Vector 3ibara ala array 7atit fiha roles ta3na ba3d nzidouhom lel comboBox
+        
         username.setSingleLineTextArea(false);
         name.setSingleLineTextArea(false);
         lastname.setSingleLineTextArea(false);
@@ -82,7 +83,6 @@ public class SignUpForm extends BaseForm {
 
         Container content = BoxLayout.encloseY(
                 new Label("Sign Up", "LogoLabel"),
-                
                 new FloatingHint(name),
                 createLineSeparator(),
                 new FloatingHint(lastname),
@@ -105,6 +105,16 @@ public class SignUpForm extends BaseForm {
         ));
         next.requestFocus();
         next.addActionListener((e) -> {
+            /**
+             * **************************
+             */
+//            String test="test";
+//            if ( Pattern.compile(".s").matcher(name.getText()).matches()) {
+//                Dialog.show("Error", "Invalid name", "OK", null);
+//                return;
+//            }
+
+
             user userr = new user(email.getText(), password.getText(), name.getText(), lastname.getText(), username.getText(), Integer.parseInt(numtel.getText()), image.getText());
             if (ServiceUser.getInstance().addUser(userr)) {
                 Dialog.show("Success", "Account created", "OK", null);
@@ -114,7 +124,6 @@ public class SignUpForm extends BaseForm {
                 new SignInForm(res).show();
 
             }
-//            ServiceUtilisateur.getInstance().signup(username, password, email, numtel, roles, res);
 
         });
     }

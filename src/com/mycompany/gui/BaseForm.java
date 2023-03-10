@@ -20,6 +20,7 @@
 package com.mycompany.gui;
 
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.io.Storage;
 import com.codename1.ui.Component;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
@@ -84,6 +85,12 @@ public class BaseForm extends Form {
         
         tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());
         tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
-        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new WalkthruForm(res).show());
+        tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+             new SignInForm(res).show();
+             SessionManager.pref.clearAll();
+             Storage.getInstance().clearStorage();
+             Storage.getInstance().clearCache();
+             
+        });
     }
 }

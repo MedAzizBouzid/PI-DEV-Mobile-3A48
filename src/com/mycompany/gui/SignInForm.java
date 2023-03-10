@@ -73,7 +73,8 @@ public class SignInForm extends BaseForm {
                 new FloatingHint(password),
                 createLineSeparator(),
                 signIn,
-                FlowLayout.encloseCenter(doneHaveAnAccount, signUp),mp
+                FlowLayout.encloseCenter(doneHaveAnAccount, signUp),
+                mp
         );
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);
@@ -90,12 +91,12 @@ public class SignInForm extends BaseForm {
         
         //Mp oublie event
         
-//        mp.addActionListener((e) -> {
-//           
-//            new ActivateForm(res).show();
-//            
-//            
-//        });
+        mp.addActionListener((e) -> {
+           
+            new ActivateForm(res).show();
+            
+            
+        });
         
     }
     
