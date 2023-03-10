@@ -39,8 +39,12 @@ public class HomeForm extends Form{
 
    
      super("Admin",BoxLayout.y());
-     this.getToolbar().addCommandToSideMenu("Type Event", null, e -> {
+     this.getToolbar().addCommandToSideMenu("Gestion Type Event", null, e -> {
          TypeEventForm w = new TypeEventForm(this);
+        w.show();    
+        });
+     this.getToolbar().addCommandToSideMenu("Gestion Events", null, e -> {
+         EventForm w = new EventForm(this);
         w.show();    
         });
     
