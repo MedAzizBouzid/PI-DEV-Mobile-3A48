@@ -19,6 +19,13 @@ import com.mycompany.myapp.gui.TypeEvent.ModifyTypeEventForm;
 import com.mycompany.myapp.services.EvenementType_Service;
 import com.mycompany.myapp.services.Evenement_Service;
 import java.util.ArrayList;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Call;
+import com.twilio.type.PhoneNumber;
+import java.lang.System;
+
+
+import java.net.URI;
 
 
 /**
@@ -26,6 +33,8 @@ import java.util.ArrayList;
  * @author Dali
  */
 public class ListEventForm extends Form {
+                        public static final String ACCOUNT_SID = "ACe5e12645de4fa19a9d817da822c48552";
+    public static final String AUTH_TOKEN = "4890e95a4b67ff9d7f2d2127ed72ddb5";
 
     public ListEventForm(Form previous) {
         setTitle("List Events");
@@ -80,8 +89,32 @@ public class ListEventForm extends Form {
                 this.revalidate();
             }
         });
+                Button reserverButton = new Button("reserver");
+        reserverButton.addActionListener(e -> {
+            // Action lorsque le bouton "Supprimer" est cliqué
+            if (Dialog.show("Confirmation", "Voulez-vous reserver cet Evenement?", "Oui", "Non")) {
+                // Appeler la fonction de service pour supprimer l'offre
+                //new EvenementType_Service().
+
+
+   
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Call call = Call.creator(
+                new com.twilio.type.PhoneNumber("+21626181201"),
+                new com.twilio.type.PhoneNumber("+12697956309"),
+                URI.create("http://demo.twilio.com/docs/voice.xml"))
+            .create();
+
+        System.out.println(call.getSid());
+    
+
+                
+            }
+        });
         container.add(editButton);
         container.add(deleteButton);
+        container.add(reserverButton);
+        
 
         add(container);
 
