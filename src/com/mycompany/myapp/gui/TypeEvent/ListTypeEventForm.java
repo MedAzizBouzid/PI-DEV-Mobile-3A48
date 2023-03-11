@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class ListTypeEventForm extends Form{
 
     public ListTypeEventForm(Form previous) {
-         setTitle("List offre");
+        setTitle("List Type Event");
         setLayout(BoxLayout.y());
 
   
@@ -40,7 +40,7 @@ public class ListTypeEventForm extends Form{
       public void addElement(EvenementType eventType) {
     Container container = new Container(new BoxLayout(BoxLayout.Y_AXIS));
     Label idLabel = new Label("ID: " + eventType.getId());
-    Label typeLabel = new Label("Prix: " + eventType.getType());
+    Label typeLabel = new Label("type: " + eventType.getType());
 
 
     

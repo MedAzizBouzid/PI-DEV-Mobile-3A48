@@ -3,6 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/EventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/HomeForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/TypeEvent/ModifyTypeEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/Event/ListEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/TypeEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/entities/EvenementType.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/Event/AddEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/GestionEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/TypeEvent/AddTypeEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/Event/ModifyEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/services/Evenement_Service.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/gui/TypeEvent/ListTypeEventForm.java</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/build.xml</file>
+            <file>file:/C:/Users/Dali/Documents/NetBeansProjects/Gestion_Event/src/com/mycompany/myapp/services/EvenementType_Service.java</file>
+        </group>
     </open-files>
 </project-private>

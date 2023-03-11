@@ -11,6 +11,7 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.myapp.gui.Event.AddEventForm;
+import com.mycompany.myapp.gui.Event.ListEventForm;
 
 /**
  *
@@ -23,12 +24,12 @@ public class EventForm extends Form{
         setLayout(BoxLayout.y());
         
         add(new Label("Choose an option"));
-        Button btnAddType = new Button("Add Event");
-        Button btnListType = new Button("List Event");
+        Button btnAddEvent = new Button("Add Event");
+        Button btnListEvent = new Button("List Event");
         
-        btnAddType.addActionListener(e-> new AddEventForm(this).show());
-       // btnListType.addActionListener(e-> new ListEventForm(this).show());
-        addAll(btnAddType,btnListType);
+        btnAddEvent.addActionListener(e-> new AddEventForm(this).show());
+        btnListEvent.addActionListener(e-> new ListEventForm(this).show());
+        addAll(btnAddEvent,btnListEvent);
         
                 getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
     }
