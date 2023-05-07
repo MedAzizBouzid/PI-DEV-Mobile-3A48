@@ -69,6 +69,7 @@ public class BaseForm extends Form {
     protected void addSideMenu(Resources res) {
         Toolbar tb = getToolbar();
         Image img = res.getImage("bergila.jpg");
+        //System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+img);
         if(img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
         }

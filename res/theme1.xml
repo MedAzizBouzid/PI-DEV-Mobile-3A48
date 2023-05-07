@@ -252,7 +252,7 @@
         <val key="StatusBarSideMenu.padding" value="0.0,0.0,0.0,0.0" />
         <val key="TextField.align" value="4" />
         <border key="TextField.border" type="empty" />
-        <val key="TextField.fgColor" value="ffffff" />
+        <val key="TextField.fgColor" value="0" />
         <val key="TextField.margin" value="0.0,0.0,0.0,0.0" />
         <val key="TextField.padUnit" value="2,2,2,2" />
         <val key="TextField.padding" value="2.0,2.0,2.0,2.0" />
@@ -336,3 +336,4 @@
     <image name="welcome-slide-2.png" type="multi"  />
     <image name="welcome-slide-3.png" type="multi"  />
 </resource>
+@import url("/styles.css");
