@@ -72,8 +72,8 @@ public class SessionManager {
         return pref.get("image",image);
     }
 
-    public static void setImage(String photo) {
-         pref.set("photo",photo);
+    public static void setImage(String image) {
+         pref.set("image",image);
     }
 
     public static String getName() {

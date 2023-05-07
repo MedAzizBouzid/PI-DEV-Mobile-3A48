@@ -7,6 +7,7 @@ package com.mycompany.gui;
 
 import com.codename1.components.FloatingHint;
 import com.codename1.components.InfiniteProgress;
+import com.codename1.io.Storage;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
@@ -29,8 +30,7 @@ import com.mycompany.services.ServiceUser;
 public class ChangePwd extends BaseForm {
 
     TextField code;
-        TextField password;
-
+    TextField password;
 
     public ChangePwd(Resources res) {
         super(new BorderLayout());
@@ -46,29 +46,27 @@ public class ChangePwd extends BaseForm {
         add(BorderLayout.NORTH,
                 BoxLayout.encloseY(
                         new Label(res.getImage("oublier.png"), "LogoLabel"),
-                        new Label("Awsome Thanks!", "LogoLabel")
+                        new Label("Change your password", "LogoLabel")
                 )
         );
 
         code = new TextField("", "Enter verification code", 20, TextField.ANY);
         code.setSingleLineTextArea(false);
-        
+
         password = new TextField("", "Enter New passord", 20, TextField.ANY);
         password.setSingleLineTextArea(false);
 
         Button valider = new Button("Valider");
-        Label haveAnAcount = new Label("Retour se connecter?");
-        Button signIn = new Button("Renouveler votre mot de passe");
+        Button signIn = new Button("Back");
         signIn.addActionListener(e -> previous.showBack());//yarja3 lel window ely9ablha
         signIn.setUIID("CenterLink");
 
         Container content = BoxLayout.encloseY(
                 new FloatingHint(code),
                 createLineSeparator(),
-                 new FloatingHint(password),
+                new FloatingHint(password),
                 createLineSeparator(),
                 valider,
-                FlowLayout.encloseCenter(haveAnAcount),
                 signIn
         );
 
@@ -90,13 +88,15 @@ public class ChangePwd extends BaseForm {
                 Dialog.show("Reset Password", "Your password has been updated successfuly", new Command("OK"));
                 new SignInForm(res).show();
                 refreshTheme();
-            }else{
+                SessionManager.pref.clearAll();
+                Storage.getInstance().clearStorage();
+                Storage.getInstance().clearCache();
+            } else {
                 ipDialog.dispose();
                 Dialog.show("Fail", "Invalide Code", new Command("OK"));
                 new ChangePwd(res).show();
                 refreshTheme();
             }
-            
 
         });
 

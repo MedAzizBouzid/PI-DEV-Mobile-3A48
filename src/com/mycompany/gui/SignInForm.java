@@ -31,7 +31,6 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.services.ServiceUser;
-import com.mycompany.services.ServiceUtilisateur;
 
 /**
  * Sign in UI

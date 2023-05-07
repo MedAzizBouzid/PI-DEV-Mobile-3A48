@@ -72,16 +72,15 @@ public class ActivateForm extends BaseForm {
         add(BorderLayout.NORTH,
                 BoxLayout.encloseY(
                         new Label(res.getImage("oublier.png"), "LogoLabel"),
-                        new Label("Awsome Thanks!", "LogoLabel")
+                        new Label("Reset password!", "LogoLabel")
                 )
         );
 
-        email = new TextField("", "saisir votre email", 20, TextField.ANY);
+        email = new TextField("", "Enter your email", 20, TextField.ANY);
         email.setSingleLineTextArea(false);
 
         Button valider = new Button("Valider");
-        Label haveAnAcount = new Label("Retour se connecter?");
-        Button signIn = new Button("Renouveler votre mot de passe");
+        Button signIn = new Button("Back to login");
         signIn.addActionListener(e -> previous.showBack());//yarja3 lel window ely9ablha
         signIn.setUIID("CenterLink");
 
@@ -89,7 +88,6 @@ public class ActivateForm extends BaseForm {
                 new FloatingHint(email),
                 createLineSeparator(),
                 valider,
-                FlowLayout.encloseCenter(haveAnAcount),
                 signIn
         );
 
@@ -134,7 +132,7 @@ public class ActivateForm extends BaseForm {
             props.put("mail.smtps.host", "smtp.gmail.com"); //SMTP Host
             props.put("mail.smtps.auth", "true"); //enable authentication
 
-            Session session = Session.getInstance(props, null); // aleh 9rahach 5ater mazlna masabinach javax.mail .jar
+            Session session = Session.getInstance(props, null); 
 
 //            
             MimeMessage msg = new MimeMessage(session);
@@ -144,7 +142,6 @@ public class ActivateForm extends BaseForm {
             msg.setSubject("Body Rock  : Reset Password ");
             msg.setSentDate(new Date(System.currentTimeMillis()));
 
-//           String mp = ServiceUtilisateur.getInstance().getPasswordByEmail(email.getText().toString(), res);//mp taw narj3lo
             String txt = "We have received a request to reset your password.\n Verification code:  " + code + " \n Use this code to reset your password";
 
             msg.setText(txt);

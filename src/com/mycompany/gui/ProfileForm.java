@@ -18,12 +18,15 @@
  */
 package com.mycompany.gui;
 
+import com.codename1.capture.Capture;
 import com.codename1.components.ScaleImageLabel;
+import com.codename1.io.File;
 import com.codename1.ui.Button;
 import com.codename1.ui.CheckBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
@@ -37,6 +40,7 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.entities.user;
 import com.mycompany.services.ServiceUser;
+import java.io.IOException;
 
 /**
  * The user profile form
@@ -45,8 +49,12 @@ import com.mycompany.services.ServiceUser;
  */
 public class ProfileForm extends BaseForm {
 
+    Image imgU = null;
+    String fileName = "";
+
     public ProfileForm(Resources res) {
         super("Newsfeed", BoxLayout.y());
+        System.out.println(SessionManager.getImage());
         Toolbar tb = new Toolbar(true);
         setToolbar(tb);
         getTitleArea().setUIID("Container");
@@ -57,7 +65,23 @@ public class ProfileForm extends BaseForm {
 
         tb.addSearchCommand(e -> {
         });
-
+        /**
+         * ***********************************
+         */
+        try {
+            imgU = Image.createImage("file://C:/Users/dhiaz/AppData/Local/Temp/" + SessionManager.getImage());
+//            imgU = Image.createImage("file://C:/Users/dhiaz/AppData/Local/Temp/temp7676216807825127570s.jpg");
+            System.out.println(imgU);
+            imgU = imgU.scaled(220, 200);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        EncodedImage encImg = EncodedImage.createFromImage(imgU, false);
+        Label lbImage = new Label("Image: ");
+        lbImage.setIcon(encImg);
+        /**
+         * ***********************************
+         */
         Image img = res.getImage("profile-background.jpg");
         if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
             img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
@@ -77,7 +101,7 @@ public class ProfileForm extends BaseForm {
                         GridLayout.encloseIn(3,
                                 facebook,
                                 FlowLayout.encloseCenter(
-                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
+                                        new Label(imgU, "PictureWhiteBackgrond")),
                                 twitter
                         )
                 )
@@ -106,16 +130,35 @@ public class ProfileForm extends BaseForm {
         TextField password = new TextField(SessionManager.getPassowrd(), "Password", 20, TextField.PASSWORD);
         password.setUIID("TextFieldBlack");
         addStringValue("Password", password);
+        /**
+         * ***************************************************
+         */
+        Button btImage = new Button("Update image");
+        Label tfimage = new Label();
+        btImage.addActionListener((e) -> {
+            String path = Capture.capturePhoto(Display.getInstance().getDisplayWidth(), -1);
 
-        CheckBox cb1 = CheckBox.createToggle(res.getImage("on-off-off.png"));
-        cb1.setUIID("Label");
-        cb1.setPressedIcon(res.getImage("on-off-on.png"));
-        CheckBox cb2 = CheckBox.createToggle(res.getImage("on-off-off.png"));
-        cb2.setUIID("Label");
-        cb2.setPressedIcon(res.getImage("on-off-on.png"));
+            if (path != null) {
 
-        addStringValue("Facebook", FlowLayout.encloseRightMiddle(cb1));
-        addStringValue("Twitter", FlowLayout.encloseRightMiddle(cb2));
+                Image imgedit = null;
+                try {
+                    imgedit = Image.createImage(path);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                tfimage.setIcon(imgedit);
+                File file = new File(path);
+                fileName = file.getName();
+                System.out.println(path);
+                System.out.println(fileName);
+
+            }
+        });
+        add(btImage);
+        /**
+         * ****************************************************
+         */
+
         System.out.println(SessionManager.getEmail());
 
         Button next = new Button("Edit");
@@ -124,9 +167,10 @@ public class ProfileForm extends BaseForm {
         add(next);
         next.requestFocus();
         next.addActionListener((e) -> {
-            user userr = new user(email.getText(), password.getText(), name.getText(), lastname.getText(), username.getText(), Integer.parseInt(numtel.getText()));
+            user userr = new user(email.getText(), password.getText(), name.getText(), lastname.getText(), username.getText(), Integer.parseInt(numtel.getText()), fileName);
             if (ServiceUser.getInstance().editUser(userr)) {
                 Dialog.show("Success", "Account Updated", "OK", null);
+                new ProfileForm(res).show();
             } else {
                 Dialog.show("Error", "Request Error", "OK", null);
 

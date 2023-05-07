@@ -16,7 +16,6 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
 import com.mycomany.utils.Statics;
 import com.mycompany.entities.user;
-import com.mycompany.gui.AjoutReclamationForm;
 import com.mycompany.gui.ProfileForm;
 import com.mycompany.gui.SessionManager;
 import java.util.Map;
@@ -115,6 +114,7 @@ public class ServiceUser {
 
                     SessionManager.setUserName(user.get("userName").toString());
                     SessionManager.setEmail(user.get("email").toString());
+
 //                
 //                //photo 
 //                
@@ -149,10 +149,12 @@ public class ServiceUser {
         String nom = t.getNom();
         String prenom = t.getPrenom();
         String userName = t.getUserName();
+        String image = t.getImage();
+
         int numTel = t.getNumTel();
 
-            String url = Statics.BASE_URL + "/editUserMobile?email=" + email + "&password=" + password + "&nom=" + nom + "&prenom=" + prenom
-                    + "&username=" + userName + "&numTel=" + numTel + "&id=" + SessionManager.getId();
+        String url = Statics.BASE_URL + "/editUserMobile?email=" + email + "&password=" + password + "&nom=" + nom + "&prenom=" + prenom
+                + "&username=" + userName + "&numTel=" + numTel + "&id=" + SessionManager.getId() + "&image=" + image;
 
         req.setUrl(url);
         req.setPost(false);
@@ -237,9 +239,9 @@ public class ServiceUser {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return codee;
     }
-    
-    public boolean changePwd(TextField code,TextField password){
-         String url = Statics.BASE_URL + "/changepwd?code=" + code.getText().toString()+"&email="+SessionManager.getEmail()+"&newPwd="+password.getText().toString();
+
+    public boolean changePwd(TextField code, TextField password) {
+        String url = Statics.BASE_URL + "/changepwd?code=" + code.getText().toString() + "&email=" + SessionManager.getEmail() + "&newPwd=" + password.getText().toString();
 
         req.setUrl(url);
         req.setPost(false);

@@ -23,6 +23,7 @@ import com.codename1.components.ScaleImageLabel;
 import com.codename1.io.Storage;
 import com.codename1.ui.Component;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
@@ -33,6 +34,7 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import java.io.IOException;
 
 /**
  * Base class for the forms with common functionality
@@ -40,6 +42,7 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class BaseForm extends Form {
+    Image imgU = null;
 
     public BaseForm() {
     }
@@ -76,11 +79,22 @@ public class BaseForm extends Form {
         ScaleImageLabel sl = new ScaleImageLabel(img);
         sl.setUIID("BottomPad");
         sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
-        
+        /********************************************/
+        try {
+            imgU = Image.createImage("file://C:/Users/dhiaz/AppData/Local/Temp/" + SessionManager.getImage());
+            System.out.println(imgU);
+            imgU = imgU.scaled(220, 200);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        EncodedImage encImg = EncodedImage.createFromImage(imgU, false);
+        Label lbImage = new Label("Image: ");
+        lbImage.setIcon(encImg);
+        /*********************************************/
         tb.addComponentToSideMenu(LayeredLayout.encloseIn(
                 sl,
                 FlowLayout.encloseCenterBottom(
-                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
+                        new Label(imgU, "PictureWhiteBackgrond"))
         ));
         
         tb.addMaterialCommandToSideMenu("Newsfeed", FontImage.MATERIAL_UPDATE, e -> new NewsfeedForm(res).show());

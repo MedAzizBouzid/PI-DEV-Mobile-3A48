@@ -18,13 +18,16 @@
  */
 package com.mycompany.gui;
 
+import com.codename1.capture.Capture;
 import com.codename1.components.FloatingHint;
+import com.codename1.io.File;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
@@ -34,10 +37,8 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.entities.user;
 import com.mycompany.services.ServiceUser;
-import com.mycompany.services.ServiceUtilisateur;
+import java.io.IOException;
 import java.util.Vector;
-
-
 
 /**
  * Signup UI
@@ -45,7 +46,7 @@ import java.util.Vector;
  * @author Shai Almog
  */
 public class SignUpForm extends BaseForm {
-
+String fileName="";
     public SignUpForm(Resources res) {
         super(new BorderLayout());
         Toolbar tb = new Toolbar(true);
@@ -65,7 +66,6 @@ public class SignUpForm extends BaseForm {
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
         TextField numtel = new TextField("", "numtel", 20, TextField.ANY);
 
-        
         username.setSingleLineTextArea(false);
         name.setSingleLineTextArea(false);
         lastname.setSingleLineTextArea(false);
@@ -74,7 +74,37 @@ public class SignUpForm extends BaseForm {
         password.setSingleLineTextArea(false);
         numtel.setSingleLineTextArea(false);
         image.setSingleLineTextArea(false);
+/******************************************************/
+Button btImage=new Button("Ajouter image");
+            Label tfimage=new Label();
+            btImage.addActionListener((e)->{
+                String path=Capture.capturePhoto(Display.getInstance().getDisplayWidth (),-1);
+//                String path="/C:/Users/dhiaz/OneDrive/Bureau/Symfony/Body_Rock/public/uploads";
+                 
+                if(path!=null){
 
+                        Image img = null;
+                    try {
+                        img = Image.createImage(path);
+                    } catch (IOException ex) {
+                      ex.printStackTrace();
+                    }
+                        tfimage.setIcon(img);
+                          File file = new File(path);
+                     fileName = file.getName();
+                System.out.println(path);
+                System.out.println(Display.getInstance().getDisplayWidth ());
+                                System.out.println(fileName);
+                                                System.out.println(img);
+
+
+
+
+
+                }
+            });
+
+/*******************************************************/
         Button next = new Button("SignUp");
         Button signIn = new Button("Sign In");
         signIn.addActionListener(e -> new SignInForm(res).show());
@@ -95,7 +125,7 @@ public class SignUpForm extends BaseForm {
                 createLineSeparator(),
                 new FloatingHint(password),
                 createLineSeparator(),
-                image
+                btImage
         );
         content.setScrollableY(true);
         add(BorderLayout.CENTER, content);
@@ -113,16 +143,20 @@ public class SignUpForm extends BaseForm {
 //                Dialog.show("Error", "Invalid name", "OK", null);
 //                return;
 //            }
-
-
-            user userr = new user(email.getText(), password.getText(), name.getText(), lastname.getText(), username.getText(), Integer.parseInt(numtel.getText()), image.getText());
-            if (ServiceUser.getInstance().addUser(userr)) {
-                Dialog.show("Success", "Account created", "OK", null);
-                new SignInForm(res).show();
+            if (name.getText().length() == 0 || lastname.getText().length() == 0 || username.getText().length() == 0 || email.getText().length() == 0 || password.getText().length() == 0 ) {
+                Dialog.show("Error", "Please fill all the fields", "OK", null);
             } else {
-                Dialog.show("Error", "Request Error", "OK", null);
-                new SignInForm(res).show();
+                // proceed with the form submission
 
+                user userr = new user(email.getText(), password.getText(), name.getText(), lastname.getText(), username.getText(), Integer.parseInt(numtel.getText()), fileName);
+                if (ServiceUser.getInstance().addUser(userr)) {
+                    Dialog.show("Success", "Account created", "OK", null);
+                    new SignInForm(res).show();
+                } else {
+                    Dialog.show("Error", "Request Error", "OK", null);
+                    new SignInForm(res).show();
+
+                }
             }
 
         });
